@@ -1,0 +1,7 @@
+[ ] gérer le fait qu'un cours soit sur réservation pour pouvoir obtenir une liste de personnes et leur envoyer un email le moment venu - uniquement pour les évènements ponctuels
+[ ] gérer les envois de mails pour les annulations, modification d'horaires ecartType
+[ ] mettre en place un batch ou un rappel pour supprimer les utilisateurs qui ne se seront pas connectés depuis plus 1an
+[ ] mettre en place un système de logs pour surveiller l'utilisation
+[ ] inclure les abonnements de stripe pour chaque code 
+[ ] supprimer un utilisateur de la liste des inscrits de coursbydate lorsque ce dernier annule son cours
+//si cours annulé, créer un event ponctuel et proposer aux personnes de s'inscrire pour y assister.
