@@ -5,24 +5,22 @@ export const typeDefs = `#graphql
     eventTitle: String
     categorie: String
     eventLocation: String
-    type: String
   }
   input inputdescription {
     eventTitle: String
     categorie: String
     eventLocation: String
-    type: String
   }
 
   type journeePeriode {
-    AllDay: Boolean
+    allDay: Boolean
     eventDateDebut: Date
     eventHeureDebut: String
     eventDateFin: Date
     eventHeureFin: String
   }
   input inputjourneePeriode {
-    AllDay: Boolean
+    allDay: Boolean
     eventDateDebut: Date
     eventHeureDebut: String
     eventDateFin: Date
@@ -102,25 +100,24 @@ export const typeDefs = `#graphql
   type data {
     description: description
     journeePeriode: journeePeriode
-    EcartType: EcartType
-    EcartChoix: EcartChoix
+    ecartType: EcartType
+    ecartChoix: EcartChoix
     infosCompl: infosCompl
   }
   input inputdata {
     description: inputdescription
     journeePeriode: inputjourneePeriode
-    EcartType: inputEcartType
-    EcartChoix: inputEcartChoix
+    ecartType: inputEcartType
+    ecartChoix: inputEcartChoix
     infosCompl: inputinfosCompl
   }
 
   type Event {
     _id: String
-    creatorId: String
     type: String
+    liste: [String]
     dateDebut: Date
     dateFin: Date
-    application: String
     selectedDate: [String]
     data: data
   }
@@ -131,7 +128,6 @@ export const typeDefs = `#graphql
 
   input inputEvent {
     _id: String
-    creatorId: String
     type: String
     dateDebut: Date
     dateFin: Date
