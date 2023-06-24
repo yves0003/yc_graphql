@@ -8,20 +8,15 @@ import cors from "cors"
 import { typeDefs } from "./typeDefs"
 import { resolvers } from "./resolver"
 import { ConnectToDB } from "./DB/connect"
-import { makeExecutableSchema } from "@graphql-tools/schema"
 
 const app = express()
 const httpServer = http.createServer(app)
 
-const { db } = await ConnectToDB()
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-})
+await ConnectToDB()
 
 const server = new ApolloServer({
-  schema,
+  typeDefs,
+  resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 })
 
@@ -33,15 +28,7 @@ app.use(
     origin: ["https://www.your-app.example", "https://studio.apollographql.com"],
   }),
   express.json(),
-  expressMiddleware(server, {
-    context: async ({ req, res }) => {
-      try {
-        return { db, req, res }
-      } catch (error) {
-        throw new Error(error)
-      }
-    },
-  })
+  expressMiddleware(server)
 )
 
 await new Promise<void>(resolve => httpServer.listen({ port: 4000 }, resolve))

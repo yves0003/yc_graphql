@@ -5,8 +5,12 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/server": "^4.7.4",
+    "@graphql-tools/load-files": "^7.0.0",
+    "@graphql-tools/schema": "^10.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "graphql": "^16.7.0",
+    "graphql-scalars": "^1.22.2",
     "mongodb": "^5.6.0",
     "nanoid": "^4.0.2"
   },

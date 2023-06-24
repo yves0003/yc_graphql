@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb"
 export const createDBMongo = (indexes: {}[], schema: {}, database: string) => {
   return async (client: MongoClient) => {
     const exist =
-      (await client.db().listCollections().toArray()).findIndex(
+      (await client.db(process.env.DATABASE_NAME).listCollections().toArray()).findIndex(
         (item: any) => item.name === database
       ) !== -1
     if (!exist) {
@@ -14,9 +14,7 @@ export const createDBMongo = (indexes: {}[], schema: {}, database: string) => {
         validationLevel: "strict",
         validationAction: "error",
       })
-      const collection = client
-        .db(process.env.DATABASE_NAME)
-        .collection(database)
+      const collection = client.db(process.env.DATABASE_NAME).collection(database)
       if (indexes && indexes.length !== 0) {
         await Promise.all(
           indexes.map(async index => {

@@ -29,7 +29,7 @@ export const schemaCours = {
         description: "description complète du cours",
       },
       prix: {
-        bsonType: "Int",
+        bsonType: "int",
         description: "Prix en euros du workshop",
       },
       dateCreation: {
@@ -52,15 +52,15 @@ export const schemaCours = {
         description: "lien des images",
       },
       nbEleves: {
-        bsonType: "Int",
+        bsonType: "int",
         description: "Nombre d'élèves autorisés par cours",
       },
       nbSeances: {
-        bsonType: "Int",
+        bsonType: "int",
         description: "Nombre de séances pour le cours",
       },
       nbEleveListeAttente: {
-        bsonType: "Int",
+        bsonType: "int",
         description: "Nombre d'élèves maximum sur la liste d'attente",
       },
       idStripe: {

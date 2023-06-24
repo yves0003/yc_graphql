@@ -13,4 +13,5 @@ type Book {
 type Query {
   books: [Book]
 }
-`;
+`
+//https://graphql.wtf/episodes/23-merge-resolvers-with-graphql-tools
