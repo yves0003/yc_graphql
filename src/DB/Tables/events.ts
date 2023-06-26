@@ -1,7 +1,7 @@
 import { Db } from "mongodb"
-import { createDBMongo } from "../../helpers/createDB_Mongo"
-import { IndexesEvents } from "../Indexes"
-import { schemaEvents } from "../Schemas"
+import { createDBMongo } from "../../helpers/createDB_Mongo.js"
+import { IndexesEvents } from "../Indexes.js"
+import { schemaEvents } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const eventDataName = process.env.DATA_EVENTS

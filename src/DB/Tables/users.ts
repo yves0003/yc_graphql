@@ -1,7 +1,7 @@
 import { Db } from "mongodb"
-import { createDBMongo } from "../../helpers/createDB_Mongo"
-import { IndexesUsers } from "../Indexes"
-import { schemaUsers } from "../Schemas"
+import { createDBMongo } from "../../helpers/createDB_Mongo.js"
+import { IndexesUsers } from "../Indexes.js"
+import { schemaUsers } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const usersDataName = process.env.DATA_USERS

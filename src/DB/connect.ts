@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb"
-import { cours, coursbydate, events, users } from "./Tables"
-import * as logging from "../Config/logging"
+import { cours, coursbydate, events, users } from "./Tables.js"
+import * as logging from "../Config/logging.js"
 const NAMESPACE = "CONNECT_DB"
 
 const client =

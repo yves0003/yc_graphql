@@ -1,7 +1,7 @@
 import { Db } from "mongodb"
-import { createDBMongo } from "../../helpers/createDB_Mongo"
-import { IndexesCoursByDate } from "../Indexes"
-import { schemaCoursByDate } from "../Schemas"
+import { createDBMongo } from "../../helpers/createDB_Mongo.js"
+import { IndexesCoursByDate } from "../Indexes.js"
+import { schemaCoursByDate } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const coursbydateDataName = process.env.DATA_COURSBYDATE

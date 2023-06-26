@@ -1,7 +1,7 @@
 import { Db } from "mongodb"
-import { createDBMongo } from "../../helpers/createDB_Mongo"
-import { IndexesCours } from "../Indexes"
-import { schemaCours } from "../Schemas"
+import { createDBMongo } from "../../helpers/createDB_Mongo.js"
+import { IndexesCours } from "../Indexes.js"
+import { schemaCours } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const coursDataName = process.env.DATA_COURS
@@ -23,6 +23,7 @@ export const create = async (db: Db, cours: CoursType) => {
       .then(({ insertedId }) => {
         return { ...dataToSave, _id: insertedId }
       })
+    console.log(result, "result")
     return result
   } catch (error) {
     throw new Error(`Un problème est survenu dans la création d'un cours : ${error}`)

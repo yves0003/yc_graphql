@@ -1,17 +1,18 @@
 export default /* GraphQL */ `
   scalar ISODate
   type Cours {
-    id: String!
+    _id: String!
     prof: String
+    title: String
     categorie: String
     excerpt: String
     description: String
-    prix: String
+    prix: Int
     tags: [String]
     link_image: String
-    nbEleves: number
-    nbSeances: number
-    nbEleveListeAttente: number
+    nbEleves: Int
+    nbSeances: Int
+    nbEleveListeAttente: Int
     idStripe: String
     dateCreation: ISODate
     dateUpdate: ISODate
@@ -19,15 +20,16 @@ export default /* GraphQL */ `
 
   input CoursInput {
     prof: String
+    title: String
     categorie: String
     excerpt: String
     description: String
-    prix: String
+    prix: Int
     tags: [String]
     link_image: String
-    nbEleves: number
-    nbSeances: number
-    nbEleveListeAttente: number
+    nbEleves: Int
+    nbSeances: Int
+    nbEleveListeAttente: Int
     idStripe: String
   }
 

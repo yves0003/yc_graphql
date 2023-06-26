@@ -5,7 +5,7 @@ type CoursType = {
   categorie: string
   excerpt: string
   description: string
-  prix: string
+  prix: number
   tags: string[]
   link_image: string
   nbEleves: number

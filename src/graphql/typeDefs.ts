@@ -1,5 +1,5 @@
 import { mergeTypeDefs } from "@graphql-tools/merge"
-import cours from "./cours"
+import cours from "./typeDefs/cours.js"
 
 const types = [cours]
 

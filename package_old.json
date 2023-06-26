@@ -12,8 +12,7 @@
     "graphql": "^16.7.0",
     "graphql-scalars": "^1.22.2",
     "mongodb": "^5.6.0",
-    "nanoid": "^4.0.2",
-    "rimraf": "^5.0.1"
+    "nanoid": "^4.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
@@ -25,8 +24,6 @@
   "type": "module",
   "scripts": {
     "compile": "tsc",
-    "build": "rimraf dist && tsc",
-    "predev": "yarn build",
-    "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\""
+    "start": "npm run compile &&  node --es-module-specifier-resolution=node ./dist/index.js"
   }
 }

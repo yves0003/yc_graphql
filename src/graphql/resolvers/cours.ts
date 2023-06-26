@@ -1,5 +1,5 @@
 import { GraphQLDateTime } from "graphql-scalars"
-import { cours } from "../../DB/Tables"
+import { cours } from "../../DB/Tables.js"
 import { Db } from "mongodb"
 const createCours = async (
   _parents: any,
@@ -8,10 +8,11 @@ const createCours = async (
 ) => {
   try {
     const result = await cours.create(db, inputCours)
+    console.log(result, "rteste")
     return result
   } catch (error) {
     console.log(error)
-    return { createCours: error }
+    return { createCours: "error" }
   }
 }
 const deleteCours = async (
@@ -28,7 +29,7 @@ const deleteCours = async (
     return result.deletedCount === 1 ? true : false
   } catch (error) {
     console.log(error)
-    return { deleteCours: error }
+    return { deleteCours: "error" }
   }
 }
 
@@ -42,7 +43,7 @@ const findOneCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursFindErr: error }
+    return { messageErrorCoursFindErr: "error" }
   }
 }
 
@@ -57,7 +58,7 @@ const updateCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursUpdateErr: error }
+    return { messageErrorCoursUpdateErr: "error" }
   }
 }
 
@@ -68,7 +69,7 @@ const coursResolvers = {
       if (obj.messageErrorCoursUpdateErr) return "messageErrorCoursUpdateErr"
       if (obj.messageErrorCoursCreateErr) return "messageErrorCoursCreateErr"
       if (obj.messageErrorCoursFindErr) return "messageErrorCoursFindErr"
-      return "CoursResult"
+      return "Cours"
     },
   },
   Query: {

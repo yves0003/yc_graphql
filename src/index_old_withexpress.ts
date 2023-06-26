@@ -6,7 +6,7 @@ import express from "express"
 import http from "http"
 import cors from "cors"
 import typeDefs from "./graphql/typeDefs"
-import resolvers from "./graphql/resolvers"
+import resolvers from "./graphql/resolver"
 import { ConnectToDB } from "./DB/connect"
 
 const app = express()
