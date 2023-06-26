@@ -1,15 +1,20 @@
 import { GraphQLDateTime } from "graphql-scalars"
 import { cours } from "../../DB/Tables"
 import { Db } from "mongodb"
-export const createCours = async (
+const createCours = async (
   _parents: any,
   { inputCours }: { inputCours: CoursType },
   { db }: { db: Db }
 ) => {
-  const result = await cours.create(db, inputCours)
-  return result
+  try {
+    const result = await cours.create(db, inputCours)
+    return result
+  } catch (error) {
+    console.log(error)
+    return { createCours: error }
+  }
 }
-export const deleteCours = async (
+const deleteCours = async (
   _parents: void,
   {
     coursId,
@@ -22,11 +27,12 @@ export const deleteCours = async (
     const result = await cours.deleteOne(db, coursId)
     return result.deletedCount === 1 ? true : false
   } catch (error) {
-    return error
+    console.log(error)
+    return { deleteCours: error }
   }
 }
 
-export const findOneCours = async (
+const findOneCours = async (
   _parents: void,
   { coursId }: { coursId: string },
   { db }: { db: Db }
@@ -35,6 +41,45 @@ export const findOneCours = async (
     const result = await cours.findOne(db, coursId)
     return result
   } catch (error) {
-    return error
+    console.log(error)
+    return { messageErrorCoursFindErr: error }
   }
 }
+
+const updateCours = async (
+  _parents: any,
+  { inputCours }: { inputCours: CoursType },
+  _context: any,
+  _infos: any
+) => {
+  try {
+    const result = await cours.updateOne(_context.db, inputCours._id, inputCours)
+    return result
+  } catch (error) {
+    console.log(error)
+    return { messageErrorCoursUpdateErr: error }
+  }
+}
+
+const coursResolvers = {
+  CoursResult: {
+    __resolveType(obj: any) {
+      if (obj.messageErrorCoursDeleteErr) return "messageErrorCoursDeleteErr"
+      if (obj.messageErrorCoursUpdateErr) return "messageErrorCoursUpdateErr"
+      if (obj.messageErrorCoursCreateErr) return "messageErrorCoursCreateErr"
+      if (obj.messageErrorCoursFindErr) return "messageErrorCoursFindErr"
+      return "CoursResult"
+    },
+  },
+  Query: {
+    findOneCours,
+  },
+  Mutation: {
+    createCours,
+    deleteCours,
+    updateCours,
+  },
+  ISODate: GraphQLDateTime,
+}
+
+export default coursResolvers

@@ -1,48 +1,15 @@
-import "dotenv/config"
 import { ApolloServer } from "@apollo/server"
-import { expressMiddleware } from "@apollo/server/express4"
-import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer"
-import express from "express"
-import http from "http"
-import cors from "cors"
-import { typeDefs } from "./typeDefs"
-import { resolvers } from "./resolver"
-import { ConnectToDB } from "./DB/connect"
-import { makeExecutableSchema } from "@graphql-tools/schema"
+import { startStandaloneServer } from "@apollo/server/standalone"
+import typeDefs from "./graphql/typeDefs"
+import resolvers from "./graphql/resolvers"
 
-const app = express()
-const httpServer = http.createServer(app)
-
-const { db } = await ConnectToDB()
-
-const schema = makeExecutableSchema({
+const server = new ApolloServer({
   typeDefs,
   resolvers,
 })
 
-const server = new ApolloServer({
-  schema,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
 })
 
-await server.start()
-
-app.use(
-  "/graphql",
-  cors<cors.CorsRequest>({
-    origin: ["https://www.your-app.example", "https://studio.apollographql.com"],
-  }),
-  express.json(),
-  expressMiddleware(server, {
-    context: async ({ req, res }) => {
-      try {
-        return { db, req, res }
-      } catch (error) {
-        throw new Error(error)
-      }
-    },
-  })
-)
-
-await new Promise<void>(resolve => httpServer.listen({ port: 4000 }, resolve))
-console.log(`🚀 Server ready at http://localhost:4000/graphql`)
+console.log(`🚀  Server ready at: ${url}`)

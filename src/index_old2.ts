@@ -5,18 +5,22 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import express from "express"
 import http from "http"
 import cors from "cors"
-import typeDefs from "./graphql/typeDefs"
-import resolvers from "./graphql/resolvers"
 import { ConnectToDB } from "./DB/connect"
-
+import { makeExecutableSchema } from "@graphql-tools/schema"
+import typeDefs from "./graphql/typeDefs/index"
+import resolvers from "./graphql/resolvers/index"
 const app = express()
 const httpServer = http.createServer(app)
 
-await ConnectToDB()
+const { db } = await ConnectToDB()
 
-const server = new ApolloServer({
+const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
+})
+
+const server = new ApolloServer({
+  schema,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 })
 
@@ -28,7 +32,15 @@ app.use(
     origin: ["https://www.your-app.example", "https://studio.apollographql.com"],
   }),
   express.json(),
-  expressMiddleware(server)
+  expressMiddleware(server, {
+    context: async ({ req, res }) => {
+      try {
+        return { db, req, res }
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+  })
 )
 
 await new Promise<void>(resolve => httpServer.listen({ port: 4000 }, resolve))
