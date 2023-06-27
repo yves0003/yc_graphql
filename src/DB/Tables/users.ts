@@ -5,25 +5,6 @@ import { schemaUsers } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const usersDataName = process.env.DATA_USERS
-type UserType = {
-  name: string
-  firstname: string
-  numTel: string
-  email: string
-  dateCreation: Date
-  dateUpdate: Date
-  dateLastConnexion: Date
-  coursPaye: {
-    idCours: string
-    datePayment: Date
-    selectedDate: {
-      idCoursbyDate: string
-      status: string
-      cancelDate: Date
-      cancelReason: string
-    }
-  }[]
-}
 
 export const createDB = createDBMongo(IndexesUsers, schemaUsers, usersDataName)
 export const create = async (db: Db, user: UserType) => {

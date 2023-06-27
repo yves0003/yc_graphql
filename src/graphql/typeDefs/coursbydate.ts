@@ -39,14 +39,19 @@ export default /* GraphQL */ `
   type CoursByDateFindErr {
     messageErrorCoursByDateFindErr: String!
   }
-  union CoursByDateResult = CoursByDate | CoursByDateCreateErr | CoursByDateUpdateErr | CoursByDateDeleteErr | CoursByDateFindErr
+  union CoursByDateResult =
+      CoursByDate
+    | CoursByDateCreateErr
+    | CoursByDateUpdateErr
+    | CoursByDateDeleteErr
+    | CoursByDateFindErr
 
   type Query {
-    findOneCoursByDate(coursByDateId: String!): CoursByDateResult!
+    findOneCoursByDate(coursByDateId: String!): CoursByDateResult
   }
   type Mutation {
     createCoursByDate(inputCoursByDate: CoursByDateInput): CoursByDateResult!
     deleteCoursByDate(coursByDateId: String!): Boolean!
-    updateCoursByDate(inputCoursByDate: CoursByDateInput, coursByDateId:String): CoursByDateResult!
+    updateCoursByDate(inputCoursByDate: CoursByDateInput, coursByDateId: String): CoursByDateResult!
   }
 `

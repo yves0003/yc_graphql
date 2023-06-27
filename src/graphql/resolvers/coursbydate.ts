@@ -11,7 +11,7 @@ const createCoursByDate = async (
     const result = await coursbydate.create(db, inputCoursByDate)
     return result
   } catch (error) {
-    return { messageErrorCoursByDateCreateErr: `La création d'un event a échoué : ${error}` }
+    return { messageErrorCoursByDateCreateErr: `La création d'un coursbydate a échoué : ${error}` }
   }
 }
 
@@ -28,8 +28,9 @@ const deleteCoursByDate = async (
     const result = await coursbydate.deleteOne(db, coursByDateId)
     return result.deletedCount === 1 ? true : false
   } catch (error) {
-    console.log(error)
-    return { messageErrorCoursByDateDeleteErr: error }
+    return {
+      messageErrorCoursByDateDeleteErr: `La suppression d'un coursbydate a échoué : ${error}`,
+    }
   }
 }
 
@@ -42,14 +43,13 @@ const findOneCoursByDate = async (
     const result = await coursbydate.findOne(db, coursByDateId)
     return result
   } catch (error) {
-    console.log(error)
-    return { messageErrorCoursByDateFindErr: error }
+    return { messageErrorCoursByDateFindErr: `La recherche d'un coursbydate a échoué : ${error}` }
   }
 }
 
 const updateCoursByDate = async (
   _parents: any,
-  { inputCoursByDate, coursByDateId }: { inputCoursByDate: CoursByDateType, coursByDateId: string },
+  { inputCoursByDate, coursByDateId }: { inputCoursByDate: CoursByDateType; coursByDateId: string },
   _context: any,
   _infos: any
 ) => {
@@ -57,8 +57,9 @@ const updateCoursByDate = async (
     const result = await coursbydate.updateOne(_context.db, coursByDateId, inputCoursByDate)
     return result
   } catch (error) {
-    console.log(error)
-    return { messageErrorCoursByDateUpdateErr: "error" }
+    return {
+      messageErrorCoursByDateUpdateErr: `La mise à jour d'un coursbydate a échoué : ${error}`,
+    }
   }
 }
 
@@ -81,7 +82,7 @@ const coursByDateResolvers = {
     updateCoursByDate,
   },
   ISODate: GraphQLDateTime,
-  ISOTime: GraphQLTime
+  ISOTime: GraphQLTime,
 }
 
 export default coursByDateResolvers

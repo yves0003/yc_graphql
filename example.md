@@ -19,7 +19,7 @@
             idStripe
             }
         }
-    }   
+    }
     //inputs
     {
         "coursId": "oh0GHAOBQ93esIkp22aPj"
@@ -94,7 +94,7 @@
 
 ## Table des CoursByDate
 
-### Mutation
+### Mutation CoursByDate
 
 #### CreateCoursByDate
 
@@ -179,5 +179,57 @@
         "inputCoursByDate": {
             "listInteressee": ["yves@test.com"],
             "status": "inscrit"
+        }
+    }
+
+## Users
+
+    mutation CreateUser($inputUser: UserInput) {
+        createUser(inputUser: $inputUser) {
+            ... on User {
+                name
+                firstname
+                numTel
+                email
+                dateCreation
+                dateUpdate
+                coursPaye {
+                        idCours
+                        datePayment
+                        selectedDate {
+                        idCoursbyDate
+                        status
+                        cancelDate
+                        cancelReason
+                    }
+                }
+                dateLastConnexion
+                _id
+            }
+            ... on UserCreateErr {
+                messageErrorUserCreateErr
+            }
+        }
+    }
+    //input
+    {
+        "inputUser": {
+            "name": "Yves",
+            "firstname": "Test",
+            "numTel": "0669205648",
+            "email": "test@yahoo.fr",
+            "coursPaye": [
+            {
+                "idCours": "test",
+                "datePayment": "2023-06-26T22:12:31.286Z",
+                "selectedDate": {
+                "idCoursbyDate": "titiuty",
+                "status": "inscrit",
+                "cancelDate": "2023-06-26T22:12:31.286Z",
+                "cancelReason": "gf"
+                }
+            }
+            ],
+            "dateLastConnexion": "2023-06-26T22:12:31.286Z"
         }
     }

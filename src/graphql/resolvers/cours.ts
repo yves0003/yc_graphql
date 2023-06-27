@@ -12,7 +12,7 @@ const createCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursCreateErr: error }
+    return { messageErrorCoursCreateErr: `La creation d'un cours a échoué : ${error}` }
   }
 }
 const deleteCours = async (
@@ -29,7 +29,7 @@ const deleteCours = async (
     return result.deletedCount === 1 ? true : false
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursDeleteErr: error }
+    return { messageErrorCoursDeleteErr: `La suppression d'un cours a échoué : ${error}` }
   }
 }
 
@@ -43,13 +43,13 @@ const findOneCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursFindErr: error }
+    return { messageErrorCoursFindErr: `La recherche d'un cours a échoué : ${error}` }
   }
 }
 
 const updateCours = async (
   _parents: any,
-  { inputCours, coursId }: { inputCours: CoursType, coursId: string },
+  { inputCours, coursId }: { inputCours: CoursType; coursId: string },
   _context: any,
   _infos: any
 ) => {
@@ -58,7 +58,7 @@ const updateCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursUpdateErr: error }
+    return { messageErrorCoursUpdateErr: `La mise à jour d'un cours a échoué : ${error}` }
   }
 }
 

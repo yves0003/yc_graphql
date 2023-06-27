@@ -29,3 +29,24 @@ type CoursByDateType = {
   dateCreation?: Date
   dateUpdate?: Date
 }
+
+type UserType = {
+  _id?: string
+  name: string
+  firstname: string
+  numTel: string
+  email: string
+  dateCreation?: Date
+  dateUpdate?: Date
+  dateLastConnexion?: Date
+  coursPaye: {
+    idCours: string
+    datePayment: Date
+    selectedDate: {
+      idCoursbyDate: string
+      status: string
+      cancelDate: Date
+      cancelReason: string
+    }
+  }[]
+}

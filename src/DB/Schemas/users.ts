@@ -37,37 +37,37 @@ export const schemaUsers = {
         description: "Adresse email de l'utilisateur",
       },
       coursPaye: {
-        bsonType: "array",
+        bsonType: ["null", "array"],
         items: {
-          bsonType: "object",
+          bsonType: ["null", "object"],
           description: "cours payé par l'utilisateur",
           properties: {
             idCours: {
-              bsonType: "string",
+              bsonType: ["null", "string"],
               description: "identifiant du cours auquel il souhaite participer",
             },
             datePayment: {
-              bsonType: "date",
+              bsonType: ["null", "date"],
               description: "date et heure de paiement du cours",
             },
             selectedDate: {
-              bsonType: "object",
+              bsonType: ["null", "object"],
               description: "",
               properties: {
                 idCoursbyDate: {
-                  bsonType: "string",
+                  bsonType: ["null", "string"],
                   description: "identifiant du cours dans la tables des cours listé par date",
                 },
                 status: {
-                  bsonType: "string",
+                  bsonType: ["null", "string"],
                   description: "status de participation au cours : inscrit ou annule",
                 },
                 cancelDate: {
-                  bsonType: "date",
+                  bsonType: ["null", "date"],
                   description: "date d'annulation de la seance",
                 },
                 cancelReason: {
-                  bsonType: "string",
+                  bsonType: ["null", "string"],
                   description: "à ne renseigné que lorsqu'une personne annule sa participation",
                 },
               },

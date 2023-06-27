@@ -48,11 +48,11 @@ export default /* GraphQL */ `
   union CoursResult = Cours | CoursCreateErr | CoursUpdateErr | CoursDeleteErr | CoursFindErr
 
   type Query {
-    findOneCours(coursId: String!): CoursResult!
+    findOneCours(coursId: String!): CoursResult
   }
   type Mutation {
     createCours(inputCours: CoursInput): CoursResult!
     deleteCours(coursId: String!): Boolean!
-    updateCours(inputCours: CoursInput, coursId:String): CoursResult!
+    updateCours(inputCours: CoursInput, coursId: String): CoursResult!
   }
 `
