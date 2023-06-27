@@ -76,7 +76,7 @@ export const schemaUsers = {
         },
       },
     },
-    required: ["_id", "title"],
+    required: ["_id"],
   },
 }
 // la date et heure de paiement permettra de voir quel nombre de séances réduire par rapport au cours pris

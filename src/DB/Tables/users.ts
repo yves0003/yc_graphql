@@ -17,6 +17,8 @@ export const create = async (db: Db, user: UserType) => {
       dateUpdate: new Date(),
       dateLastConnexion: new Date(),
     }
+
+    console.log(dataToSave, "Tables User")
     const result = await db
       .collection<UserType>(usersDataName)
       .insertOne(dataToSave)

@@ -8,7 +8,6 @@ const createCours = async (
 ) => {
   try {
     const result = await cours.create(db, inputCours)
-    console.log(result, "rteste")
     return result
   } catch (error) {
     console.log(error)
