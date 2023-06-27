@@ -53,6 +53,6 @@ export default /* GraphQL */ `
   type Mutation {
     createCours(inputCours: CoursInput): CoursResult!
     deleteCours(coursId: String!): Boolean!
-    updateCours(inputCours: CoursInput): CoursResult!
+    updateCours(inputCours: CoursInput, coursId:String): CoursResult!
   }
 `

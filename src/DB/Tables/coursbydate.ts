@@ -5,17 +5,6 @@ import { schemaCoursByDate } from "../Schemas.js"
 import { nanoid } from "nanoid"
 
 const coursbydateDataName = process.env.DATA_COURSBYDATE
-type CoursByDateType = {
-  dateJ: Date
-  idEvent: string
-  listInscrit: string[]
-  listInteressee: []
-  status: string
-  eventHeureDebut: Date
-  eventHeureFin: Date
-  dateCreation: Date
-  dateUpdate: Date
-}
 
 export const createDB = createDBMongo(IndexesCoursByDate, schemaCoursByDate, coursbydateDataName)
 
@@ -34,6 +23,8 @@ export const create = async (db: Db, cours: CoursByDateType) => {
       .then(({ insertedId }) => {
         return { ...dataToSave, _id: insertedId }
       })
+
+      
     return result
   } catch (error) {
     throw new Error(`Un problème est survenu dans la création d'un coursbydate : ${error}`)

@@ -8,6 +8,10 @@ export const schemaCoursByDate = {
         bsonType: "string",
         description: "Identifiant de la séance du jour",
       },
+      title: {
+        bsonType: "string",
+        description: "Titre de l'evenement",
+      },
       dateJ: {
         bsonType: "date",
         description:

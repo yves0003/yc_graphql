@@ -15,3 +15,17 @@ type CoursType = {
   dateCreation?: Date
   dateUpdate?: Date
 }
+
+type CoursByDateType = {
+  _id?: string
+  title: string
+  dateJ: Date
+  idEvent: string
+  listInscrit: string[]
+  listInteressee: string[]
+  status: string
+  eventHeureDebut: Date
+  eventHeureFin: Date
+  dateCreation?: Date
+  dateUpdate?: Date
+}

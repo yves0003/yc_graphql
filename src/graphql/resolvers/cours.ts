@@ -12,7 +12,7 @@ const createCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { createCours: "error" }
+    return { messageErrorCoursCreateErr: error }
   }
 }
 const deleteCours = async (
@@ -29,7 +29,7 @@ const deleteCours = async (
     return result.deletedCount === 1 ? true : false
   } catch (error) {
     console.log(error)
-    return { deleteCours: "error" }
+    return { messageErrorCoursDeleteErr: error }
   }
 }
 
@@ -43,22 +43,22 @@ const findOneCours = async (
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursFindErr: "error" }
+    return { messageErrorCoursFindErr: error }
   }
 }
 
 const updateCours = async (
   _parents: any,
-  { inputCours }: { inputCours: CoursType },
+  { inputCours, coursId }: { inputCours: CoursType, coursId: string },
   _context: any,
   _infos: any
 ) => {
   try {
-    const result = await cours.updateOne(_context.db, inputCours._id, inputCours)
+    const result = await cours.updateOne(_context.db, coursId, inputCours)
     return result
   } catch (error) {
     console.log(error)
-    return { messageErrorCoursUpdateErr: "error" }
+    return { messageErrorCoursUpdateErr: error }
   }
 }
 

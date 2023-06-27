@@ -8,7 +8,7 @@ import cors from "cors"
 import { ConnectToDB } from "./DB/connect.js"
 import { makeExecutableSchema } from "@graphql-tools/schema"
 import typeDefs from "./graphql/typeDefs.js"
-import resolvers from "./graphql/resolver.js"
+import resolvers from "./graphql/resolvers.js"
 const app = express()
 const httpServer = http.createServer(app)
 
