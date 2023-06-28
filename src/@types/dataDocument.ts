@@ -50,3 +50,47 @@ type UserType = {
     }
   }[]
 }
+
+type EventType = {
+  type: string
+  selectedDate: string[]
+  dateCreation: Date
+  dateDebut: Date
+  dateUpdate: Date
+  dateFin: Date
+  data?: {
+    description: {
+      eventTitle: string
+      categorie: string
+      eventLocation: string
+    }
+    journeePeriode: {
+      allDay: boolean
+      eventDateDebut: string
+      eventHeureDebut: Date
+      eventDateFin: string
+      eventHeureFin: Date
+    }
+    ecartType: {
+      periodicite: string
+    }
+    ecartChoix: {
+      periodicite: string
+      selectedMonthAnnee: string
+      nbPeriode: string
+      dayHebdo: {
+        lun: boolean
+        mar: boolean
+        mer: boolean
+        jeu: boolean
+        ven: boolean
+        sam: boolean
+        dim: boolean
+      }
+      nbMois: string
+    }
+    infosCompl: {
+      textDescription: string
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { createDBMongo } from "../../helpers/createDB_Mongo.js"
 import { IndexesCours } from "../Indexes.js"
 import { schemaCours } from "../Schemas.js"
 import { nanoid } from "nanoid"
+import { flattenObject } from "../../helpers/flatternMongoDb.js"
 
 const coursDataName = process.env.DATA_COURS
 
@@ -51,9 +52,10 @@ export const deleteOne = async (db: Db, coursId: any) => {
 export const updateOne = async (db: Db, coursId: any, valToUpdate: CoursType) => {
   try {
     valToUpdate.dateUpdate = new Date()
+    const flatValToUpdate = flattenObject(valToUpdate)
     const result = await db
       .collection<CoursType>(coursDataName)
-      .findOneAndUpdate({ _id: coursId }, { $set: valToUpdate }, { returnDocument: "after" })
+      .findOneAndUpdate({ _id: coursId }, { $set: flatValToUpdate }, { returnDocument: "after" })
       .then(({ value }) => {
         return value
       })

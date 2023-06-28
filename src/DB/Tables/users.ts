@@ -3,6 +3,7 @@ import { createDBMongo } from "../../helpers/createDB_Mongo.js"
 import { IndexesUsers } from "../Indexes.js"
 import { schemaUsers } from "../Schemas.js"
 import { nanoid } from "nanoid"
+import { flattenObject } from "../../helpers/flatternMongoDb.js"
 
 const usersDataName = process.env.DATA_USERS
 
@@ -52,9 +53,10 @@ export const deleteOne = async (db: Db, userId: any) => {
 export const updateOne = async (db: Db, userId: any, valToUpdate: UserType) => {
   try {
     valToUpdate.dateUpdate = new Date()
+    const flatValToUpdate = flattenObject(valToUpdate)
     const result = await db
       .collection<UserType>(usersDataName)
-      .findOneAndUpdate({ _id: userId }, { $set: valToUpdate }, { returnDocument: "after" })
+      .findOneAndUpdate({ _id: userId }, { $set: flatValToUpdate }, { returnDocument: "after" })
       .then(({ value }) => {
         return value
       })
