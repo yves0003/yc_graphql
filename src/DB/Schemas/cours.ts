@@ -67,6 +67,26 @@ export const schemaCours = {
         bsonType: "string",
         description: "identifiant stripe",
       },
+      prerequis: {
+        bsonType: "string",
+        description: "prerequis de la formation",
+      },
+      materiels: {
+        bsonType: "string",
+        description: "matériel pour la formation",
+      },
+      conseils: {
+        bsonType: "string",
+        description: "conseils pour la formation",
+      },
+      allergies: {
+        bsonType: "string",
+        description: "allergies repas",
+      },
+      adresse: {
+        bsonType: "string",
+        description: "adresse du lieu de formation",
+      },
     },
     required: ["_id", "title"],
   },

@@ -12,6 +12,11 @@ type CoursType = {
   nbSeances: number
   nbEleveListeAttente: number
   idStripe: string
+  prerequis: string
+  materiels: string
+  conseils: string
+  allergies: string
+  adresse: string
   dateCreation?: Date
   dateUpdate?: Date
 }
