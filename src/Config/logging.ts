@@ -33,3 +33,10 @@ export const debug = (namespace: string, message: string, object?: any) => {
     console.log(`[${getTimeStamp()}] - [DEBUG] - [${namespace}] ${message}`)
   }
 }
+
+export default {
+  info,
+  warn,
+  error,
+  debug,
+}

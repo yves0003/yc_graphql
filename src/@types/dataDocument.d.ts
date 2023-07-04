@@ -50,3 +50,31 @@ type UserType = {
     }
   }[]
 }
+
+type UserAdminType = {
+  _id: string
+  userEmail: string
+  userCompleteName: string
+  userPassword: string
+  userPassCode: {
+    code: string
+    sendAt: Date
+    reason: ("Inscription" | "resetcode")[]
+  }
+  userPreferLang: string
+  userVerifAccount: Boolean
+  userStatusDelete: Boolean
+  userDateDelete: Date
+  createdAt: Date
+  dateUpdate: Date
+  dateDelete: Date
+  tokenVersion: number
+  roles: ("Admin" | "Artisan" | "Indep" | "Influenceur" | "Entreprise" | "Etudiant" | "Public")[]
+}
+type Request = import("express").Request
+interface RequestExtended extends Request {
+  user: string
+  roles: ("Admin" | "Artisan" | "Indep" | "Influenceur" | "Entreprise" | "Etudiant" | "Public")[]
+  db: import("mongodb").Db
+  cookies: { auth?: string }
+}

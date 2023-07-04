@@ -9,22 +9,27 @@ import { ConnectToDB } from "./DB/connect.js"
 import { makeExecutableSchema } from "@graphql-tools/schema"
 import typeDefs from "./graphql/typeDefs.js"
 import resolvers from "./graphql/resolvers.js"
-const app = express()
-const httpServer = http.createServer(app)
+import { refreshTokenRoute } from "./routes/refresh_tokenH.js"
+import { verifTokenRoute } from "./routes/verif_tokenH.js"
+import { sendemailRoute } from "./routes/saveEmailSendinBlue.js"
 
 const { db } = await ConnectToDB()
-
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 })
 
+const app = express()
+const httpServer = http.createServer(app)
 const server = new ApolloServer({
   schema,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 })
-
 await server.start()
+
+app.use("/", refreshTokenRoute(db))
+app.use("/", verifTokenRoute)
+app.use("/", sendemailRoute)
 
 app.use(
   "/graphql",
@@ -43,5 +48,6 @@ app.use(
   })
 )
 
-await new Promise<void>(resolve => httpServer.listen({ port: 4000 }, resolve))
-console.log(`🚀 Server ready at http://localhost:4000/graphql`)
+const port = process.env.SERVER_PORT || 4001
+await new Promise<void>(resolve => httpServer.listen({ port }, resolve))
+console.log(`🚀 Server ready at http://localhost:${port}/graphql`)

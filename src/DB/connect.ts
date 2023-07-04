@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb"
 import { cours, coursbydate, events, users } from "./Tables.js"
 import * as logging from "../Config/logging.js"
+import adminUsers from "./Tables/adminUsers.js"
 const NAMESPACE = "CONNECT_DB"
 
 const client =
@@ -15,6 +16,7 @@ export const ConnectToDB = async () => {
     await coursbydate.createDB(client)
     await users.createDB(client)
     await events.createDB(client)
+    await adminUsers.createDB(client)
     const db = client.db(process.env.DATABASE_NAME)
     logging.info(NAMESPACE, `Connecté à la base ${process.env.DATABASE_NAME}`)
     return { db, dbClient: client }
