@@ -3,6 +3,7 @@ import { createDBMongo } from "../../helpers/createDB_Mongo.js"
 import { IndexesCoursByDate } from "../Indexes.js"
 import { schemaCoursByDate } from "../Schemas.js"
 import { nanoid } from "nanoid"
+import { flattenObject } from "../../helpers/flatternMongoDb.js"
 
 const coursbydateDataName = process.env.DATA_COURSBYDATE
 
@@ -24,7 +25,6 @@ export const create = async (db: Db, cours: CoursByDateType) => {
         return { ...dataToSave, _id: insertedId }
       })
 
-      
     return result
   } catch (error) {
     throw new Error(`Un problème est survenu dans la création d'un coursbydate : ${error}`)
@@ -54,9 +54,10 @@ export const deleteOne = async (db: Db, coursId: any) => {
 export const updateOne = async (db: Db, coursId: any, valToUpdate: CoursByDateType) => {
   try {
     valToUpdate.dateUpdate = new Date()
+    const flatValToUpdate = flattenObject(valToUpdate)
     const result = await db
       .collection<CoursByDateType>(coursbydateDataName)
-      .findOneAndUpdate({ _id: coursId }, { $set: valToUpdate }, { returnDocument: "after" })
+      .findOneAndUpdate({ _id: coursId }, { $set: flatValToUpdate }, { returnDocument: "after" })
       .then(({ value }) => {
         return value
       })

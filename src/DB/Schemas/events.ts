@@ -51,10 +51,10 @@ export const schemaEvents = {
             bsonType: "object",
             properties: {
               allDay: { bsonType: "bool" },
-              eventDateDebut: { bsonType: "string" },
+              eventDateDebut: { bsonType: "date" },
               eventHeureDebut: { bsonType: "date" },
               eventDateFin: {
-                bsonType: "string",
+                bsonType: "date",
                 description:
                   "date si elle est différente de celle de début, pour les évènements ponctuels",
               },
@@ -97,7 +97,7 @@ export const schemaEvents = {
         },
       },
     },
-    required: ["_id", "type"],
+    required: ["_id"],
   },
 }
 

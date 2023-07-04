@@ -233,3 +233,111 @@
             "dateLastConnexion": "2023-06-26T22:12:31.286Z"
         }
     }
+
+
+## Event
+
+### Mutation create 
+
+    mutation CreateEvent($inputEvent: EventInput) {
+    createEvent(inputEvent: $inputEvent) {
+        ... on Event {
+        _id
+        type
+        selectedDate
+        dateCreation
+        dateUpdate
+        dateDebut
+        dateFin
+        data {
+            description {
+            eventTitle
+            categorie
+            eventLocation
+            }
+            journeePeriode {
+            allDay
+            eventDateDebut
+            eventHeureDebut
+            eventDateFin
+            eventHeureFin
+            }
+            ecartType {
+            periodicite
+            }
+            ecartChoix {
+            dayHebdo {
+                dim
+                jeu
+                lun
+                mar
+                mer
+                sam
+                ven
+            }
+            nbMois
+            nbPeriode
+            periodicite
+            selectedMonthAnnee
+            }
+            infosCompl {
+            textDescription
+            }
+        }
+        }
+        ... on EventCreateErr {
+        messageErrorEventCreateErr
+        }
+    }
+    }
+
+    //input
+    {
+    "inputEvent": {
+        "type": "recurrent",
+        "dateDebut": "2021-08-23T00:00:00.000+00:00",
+        "dateFin": "2021-08-23T00:00:00.000+00:00",
+        "data": {
+        "description": {
+            "eventTitle": "Messe Dominicale",
+            "categorie": "01",
+            "eventLocation": "Eleveur ngousso"
+        },
+        "journeePeriode": {
+            "allDay": false,
+            "eventDateDebut": "2021-08-23T00:00:00.000+00:00",
+            "eventHeureDebut": "10:00:00Z",
+            "eventDateFin": "2021-08-23T00:00:00.000+00:00",
+            "eventHeureFin": "11:00:00Z"
+        },
+        "ecartType": {
+            "periodicite": "semaine"
+        },
+        "ecartChoix": {
+            "periodicite": "1_semaine",
+            "selectedMonthAnnee": "",
+            "nbPeriode": "1",
+            "dayHebdo": {
+            "lun": false,
+            "mar": false,
+            "mer": false,
+            "jeu": false,
+            "ven": false,
+            "sam": false,
+            "dim": true
+            },
+            "nbMois": "JourDuMois"
+        },
+        "infosCompl": {
+            "textDescription": ""
+        }
+        },
+        "selectedDate": ["test"]
+    }
+    }
+    
+
+
+https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/
+
+https://www.mongodb.com/community/forums/t/how-to-update-a-subdocument-ref/145489

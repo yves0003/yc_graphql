@@ -12,6 +12,11 @@ type CoursType = {
   nbSeances: number
   nbEleveListeAttente: number
   idStripe: string
+  prerequis: string
+  materiels: string
+  conseils: string
+  allergies: string
+  adresse: string
   dateCreation?: Date
   dateUpdate?: Date
 }
@@ -51,6 +56,7 @@ type UserType = {
   }[]
 }
 
+<<<<<<< HEAD:src/@types/dataDocument.d.ts
 type UserAdminType = {
   _id: string
   userEmail: string
@@ -77,4 +83,48 @@ interface RequestExtended extends Request {
   roles: ("Admin" | "Artisan" | "Indep" | "Influenceur" | "Entreprise" | "Etudiant" | "Public")[]
   db: import("mongodb").Db
   cookies: { auth?: string }
+=======
+type EventType = {
+  type: string
+  selectedDate: string[]
+  dateCreation: Date
+  dateDebut: Date
+  dateUpdate: Date
+  dateFin: Date
+  data?: {
+    description: {
+      eventTitle: string
+      categorie: string
+      eventLocation: string
+    }
+    journeePeriode: {
+      allDay: boolean
+      eventDateDebut: string
+      eventHeureDebut: Date
+      eventDateFin: string
+      eventHeureFin: Date
+    }
+    ecartType: {
+      periodicite: string
+    }
+    ecartChoix: {
+      periodicite: string
+      selectedMonthAnnee: string
+      nbPeriode: string
+      dayHebdo: {
+        lun: boolean
+        mar: boolean
+        mer: boolean
+        jeu: boolean
+        ven: boolean
+        sam: boolean
+        dim: boolean
+      }
+      nbMois: string
+    }
+    infosCompl: {
+      textDescription: string
+    }
+  }
+>>>>>>> 20c0338853bc70c40c8265843dcb9e1c7c3fc8c7:src/@types/dataDocument.ts
 }

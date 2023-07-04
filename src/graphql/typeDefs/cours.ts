@@ -16,6 +16,11 @@ export default /* GraphQL */ `
     idStripe: String
     dateCreation: ISODate
     dateUpdate: ISODate
+    prerequis: String
+    materiels: String
+    conseils: String
+    allergies: String
+    adresse: String
   }
 
   input CoursInput {
@@ -31,6 +36,11 @@ export default /* GraphQL */ `
     nbSeances: Int
     nbEleveListeAttente: Int
     idStripe: String
+    prerequis: String
+    materiels: String
+    conseils: String
+    allergies: String
+    adresse: String
   }
 
   type CoursDeleteErr {
