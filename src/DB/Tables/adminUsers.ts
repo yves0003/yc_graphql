@@ -20,6 +20,7 @@ export const add = async (db: Db, input: Document) => {
       dateUpdate: new Date(),
       userVerifAccount: false,
     }
+
     const result = await db
       .collection<Document>(userAdminDataName)
       .insertOne(dataToSave)

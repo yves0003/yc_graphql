@@ -7,7 +7,7 @@ import { signAccessToken, signRefreshToken } from "../../helpers/jwt_helper.js"
 import { checkAuth } from "../../helpers/check-auth.js"
 import { tokenVersion } from "../../Config/tokenVersion.js"
 
-const deleteUser = async (
+const deleteAdminUser = async (
   _parents,
   { input: { _id } }: { input: { _id: string } },
   { db }: { db: Db }
@@ -136,10 +136,15 @@ const inscription = async (
       userPassCode,
       tokenVersion: tokenVersion,
     })
+
+    console.log(newUser, "newUser")
     return newUser
     // valider les inputs
   } catch (error) {
     console.log(error)
+    return {
+      messageErrorUserAlreadyVerified: `l'utilisateur vérifié: ${error}`,
+    }
   }
 }
 
@@ -201,7 +206,11 @@ const logoutUser = async (_parents, _args, _context) => {
   }
   return true
 }
-const updateOneUser = async (_parents, { input: { _id, userEmail, ...valToUpdate } }, _context) => {
+const updateOneAdminUser = async (
+  _parents,
+  { input: { _id, userEmail, ...valToUpdate } },
+  _context
+) => {
   try {
     const data = await adminUsers.updateOne(_context.db, _id ? _id : userEmail, valToUpdate)
     return data
@@ -210,7 +219,7 @@ const updateOneUser = async (_parents, { input: { _id, userEmail, ...valToUpdate
   }
 }
 
-const findOneUser = async (_parents, { input }, _context) => {
+const findOneAdminUser = async (_parents, { input }, _context) => {
   try {
     await checkAuth(_context)
     const data = await adminUsers.findOne(_context.db, {
@@ -219,7 +228,7 @@ const findOneUser = async (_parents, { input }, _context) => {
     return data
   } catch (error) {
     return {
-      messageErrorNotFound: `PB findOneUser ${input.userEmail}:${error}`,
+      messageErrorNotFound: `PB findOneAdminUser ${input.userEmail}:${error}`,
     }
   }
 }
@@ -268,38 +277,38 @@ const updatePassword = async (
 }
 
 const userAdminResolver = {
-  UserResult: {
+  UserAdminResult: {
     __resolveType(obj: any) {
       //connexion
-      if (obj.messageErrorInfoIncorrect) return "UserInfoIncorrect"
-      if (obj.messageErrorNotFound) return "UserIntrouvable"
-      if (obj.messageErrorDel) return "UserSupprime"
-      if (obj.messageErrorWrongID) return "UserWrongID"
-      if (obj.messageErrorErrAccessCookies) return "UserAccessCookieDenied"
+      if (obj.messageErrorInfoIncorrect) return "UserAdminInfoIncorrect"
+      if (obj.messageErrorNotFound) return "UserAdminIntrouvable"
+      if (obj.messageErrorDel) return "UserAdminSupprime"
+      if (obj.messageErrorWrongID) return "UserAdminWrongID"
+      if (obj.messageErrorErrAccessCookies) return "UserAdminAccessCookieDenied"
       //inscription
-      if (obj.messageErrorEmailUsed) return "UserEmailUtilise"
-      if (obj.messageErrorUserNotVerified) return "UserNotVerified"
+      if (obj.messageErrorEmailUsed) return "UserAdminEmailUtilise"
+      if (obj.messageErrorUserNotVerified) return "UserAdminNotVerified"
       //verifCode
-      if (obj.messageErrorUserAlreadyVerified) return "UserVerified"
-      if (obj.messageErrorCodeIncorrect) return "UserCodeIncorrect"
+      if (obj.messageErrorUserAlreadyVerified) return "UserAdminVerified"
+      if (obj.messageErrorCodeIncorrect) return "UserAdminCodeIncorrect"
       //updateUser
-      if (obj.messageErrorUpdateCookie) return "UserUpdateCookie"
-      return "User"
+      if (obj.messageErrorUpdateCookie) return "UserAdminUpdateCookie"
+      return "UserAdmin"
     },
   },
   Query: {
-    findOneUser,
+    findOneAdminUser,
     connexion,
   },
   Mutation: {
-    deleteUser,
+    deleteAdminUser,
     updatePassword,
     verifCode,
     inscription,
     logoutUser,
-    updateOneUser,
+    updateOneAdminUser,
   },
-  DateTime: GraphQLDateTime,
+  ISODate: GraphQLDateTime,
 }
 
 export default userAdminResolver

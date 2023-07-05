@@ -56,7 +56,6 @@ type UserType = {
   }[]
 }
 
-<<<<<<< HEAD:src/@types/dataDocument.d.ts
 type UserAdminType = {
   _id: string
   userEmail: string
@@ -83,7 +82,7 @@ interface RequestExtended extends Request {
   roles: ("Admin" | "Artisan" | "Indep" | "Influenceur" | "Entreprise" | "Etudiant" | "Public")[]
   db: import("mongodb").Db
   cookies: { auth?: string }
-=======
+}
 type EventType = {
   type: string
   selectedDate: string[]
@@ -126,5 +125,4 @@ type EventType = {
       textDescription: string
     }
   }
->>>>>>> 20c0338853bc70c40c8265843dcb9e1c7c3fc8c7:src/@types/dataDocument.ts
 }
