@@ -136,8 +136,6 @@ const inscription = async (
       userPassCode,
       tokenVersion: tokenVersion,
     })
-
-    console.log(newUser, "newUser")
     return newUser
     // valider les inputs
   } catch (error) {

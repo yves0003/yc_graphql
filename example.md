@@ -341,3 +341,22 @@
 https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/
 
 https://www.mongodb.com/community/forums/t/how-to-update-a-subdocument-ref/145489
+
+//Inscription
+
+//input
+    {
+        "input": {
+            "roles": ["admin"],
+            "userCompleteName": "ZENDJA Yves",
+            "userEmail": "zendjayves@gmail.com",
+            "userPassCode": {
+            "code": "TEST",
+            "reason": ["Inscription"],
+            "sendAt": "2023-06-26T22:12:31.286Z"
+            },
+            "userPassword": "test",
+            "userPreferLang": "fr",
+        }
+    }
+
