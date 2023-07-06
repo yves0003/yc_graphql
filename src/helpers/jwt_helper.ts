@@ -48,9 +48,9 @@ export const signRefreshToken = (user: WithId<Partial<UserAdminType>>): Promise<
   return new Promise((resolve, reject) => {
     const payload = user
     const options = {
-      // expiresIn: "7d",
+      expiresIn: "7d",
       //expiresIn: "30s",
-      expiresIn: "1m",
+      // expiresIn: "1m",
       //expiresIn: "30m",
       issuer: process.env.ISSUER_JWT,
       audience: user._id,
