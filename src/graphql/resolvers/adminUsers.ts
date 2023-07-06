@@ -139,7 +139,6 @@ const inscription = async (
     return newUser
     // valider les inputs
   } catch (error) {
-    console.log(error)
     return {
       messageErrorUserAlreadyVerified: `l'utilisateur vérifié: ${error}`,
     }

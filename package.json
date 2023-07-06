@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@apollo/server": "^4.7.4",
-    "@graphql-tools/load-files": "^7.0.0",
-    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-tools/merge": "^9.0.0",
     "@sendinblue/client": "^3.3.1",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "graphql": "^16.7.0",
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.3.1",

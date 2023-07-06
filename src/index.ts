@@ -12,6 +12,7 @@ import resolvers from "./graphql/resolvers.js"
 import { refreshTokenRoute } from "./routes/refresh_tokenH.js"
 import { verifTokenRoute } from "./routes/verif_tokenH.js"
 import { sendemailRoute } from "./routes/saveEmailSendinBlue.js"
+import cookieParser from 'cookie-parser'
 
 const { db } = await ConnectToDB()
 const schema = makeExecutableSchema({
@@ -26,17 +27,15 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 })
 await server.start()
-app.use(cors({ origin: "http://localhost:3001", credentials: true }))
+app.use(cookieParser())
+app.use(express.json())
+app.use(cors({ origin: ["http://localhost:3001","https://www.your-app.example", "https://studio.apollographql.com"], credentials: true }))
 app.use("/", refreshTokenRoute(db))
 app.use("/", verifTokenRoute)
 app.use("/", sendemailRoute)
 
 app.use(
   "/graphql",
-  cors<cors.CorsRequest>({
-    origin: ["https://www.your-app.example", "https://studio.apollographql.com"],
-  }),
-  express.json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
       try {

@@ -7,7 +7,7 @@ import { adminUsers } from "../DB/Tables.js"
 const router = express.Router()
 const refreshTokenRouteDB = (db: Db) => {
   return router.post("/refresh_tokenH", async (req: Request, res: Response) => {
-    const auth = req.cookies?.jid
+    const auth = req.cookies.jid
     if (!auth || auth === "undefined") {
       return res.send({ success: false, accessToken: "" })
     }
@@ -22,9 +22,9 @@ const refreshTokenRouteDB = (db: Db) => {
       if (foundUser.tokenVersion !== payload.tokenVersion) {
         return res.send({ sucess: false, accessToken: "" })
       }
-      const roles = Object.values(foundUser.roles!)
+      //const roles = Object.values(foundUser.roles!)
       const accessToken = await signAccessToken({
-        UserInfo: { _id: foundUser!._id!, roles },
+        UserInfo: { _id: foundUser!._id!, roles:["Admin" ]},
       })
       const newRefreshToken = await signRefreshToken({
         _id: payload._id,
