@@ -26,7 +26,7 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 })
 await server.start()
-
+app.use(cors({ origin: "http://localhost:3001", credentials: true }))
 app.use("/", refreshTokenRoute(db))
 app.use("/", verifTokenRoute)
 app.use("/", sendemailRoute)
