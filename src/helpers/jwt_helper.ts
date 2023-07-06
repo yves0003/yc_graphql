@@ -14,9 +14,9 @@ export const signAccessToken = (user: PayLoadJWT): Promise<string> => {
   return new Promise((resolve, reject) => {
     const payload = user
     const options = {
-      //expiresIn: "15m",
+      expiresIn: "15m",
       //expiresIn: "15s",
-      expiresIn: "30s",
+      //expiresIn: "30s",
       issuer: process.env.ISSUER_JWT,
       audience: user.UserInfo._id, // ce jwt est pour ce client
     }
