@@ -46,6 +46,20 @@ const findOneCours = async (
   }
 }
 
+const findAllCours = async (
+  _parents: void,
+  arg: void,
+  { db }: { db: Db }
+) => {
+  try {
+    const result = await cours.findAll(db)
+    return result
+  } catch (error) {
+    console.log(error)
+    return { messageErrorCoursFindErr: `La recherche de tous les cours a échoué : ${error}` }
+  }
+}
+
 const updateCours = async (
   _parents: any,
   { inputCours, coursId }: { inputCours: CoursType; coursId: string },
@@ -73,6 +87,7 @@ const coursResolvers = {
   },
   Query: {
     findOneCours,
+    findAllCours,
   },
   Mutation: {
     createCours,

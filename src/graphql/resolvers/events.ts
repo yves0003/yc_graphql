@@ -45,6 +45,20 @@ const findOneEvent = async (
   }
 }
 
+const findAllEvent = async (
+  _parents: void,
+  arg: void,
+  { db }: { db: Db }
+) => {
+  try {
+    const result = await events.findAll(db)
+    return result
+  } catch (error) {
+    console.log(error)
+    return { messageErrorCoursFindErr: `La recherche de tous les events a échoué : ${error}` }
+  }
+}
+
 const updateEvent = async (
   _parents: any,
   { inputEvent, eventId }: { inputEvent: EventType; eventId: string },
@@ -71,6 +85,7 @@ const eventResolvers = {
   },
   Query: {
     findOneEvent,
+    findAllEvent
   },
   Mutation: {
     createEvent,

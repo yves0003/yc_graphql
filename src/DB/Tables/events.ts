@@ -18,7 +18,6 @@ export const create = async (db: Db, event: EventType) => {
       dateCreation: new Date(),
       dateUpdate: new Date(),
     }
-    console.log(dataToSave)
     const result = await db
       .collection(eventDataName)
       .insertOne(dataToSave)
@@ -34,6 +33,16 @@ export const create = async (db: Db, event: EventType) => {
 export const findOne = async (db: Db, eventId: any) => {
   try {
     const data = await db.collection<EventType>(eventDataName).findOne({ _id: eventId })
+    return data
+  } catch (error) {
+    throw new Error(`Un problème est survenue dans la requête findOne des events : ${error}`)
+  }
+}
+
+export const findAll = async (db: Db) => {
+  try {
+    const data = await db.collection<EventType>(eventDataName).find().sort({ dateCreation: -1 })
+    .toArray()
     return data
   } catch (error) {
     throw new Error(`Un problème est survenue dans la requête findOne des events : ${error}`)

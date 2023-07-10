@@ -59,6 +59,7 @@ export default /* GraphQL */ `
 
   type Query {
     findOneCours(coursId: String!): CoursResult
+    findAllCours:[CoursResult]
   }
   type Mutation {
     createCours(inputCours: CoursInput): CoursResult!

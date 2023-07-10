@@ -121,6 +121,7 @@ export default /* GraphQL */ `
 
   type Query {
     findOneEvent(userId: String!): UserResult
+    findAllEvent:[UserResult]
   }
   type Mutation {
     createEvent(inputEvent: EventInput): EventResult!
