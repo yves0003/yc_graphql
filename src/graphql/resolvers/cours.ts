@@ -1,4 +1,4 @@
-import { GraphQLDateTime } from "graphql-scalars"
+import { GraphQLDateTime, GraphQLTime } from "graphql-scalars"
 import { cours } from "../../DB/Tables.js"
 import { Db } from "mongodb"
 const createCours = async (
@@ -95,6 +95,7 @@ const coursResolvers = {
     updateCours,
   },
   ISODate: GraphQLDateTime,
+  ISOTime: GraphQLTime,
 }
 
 export default coursResolvers
