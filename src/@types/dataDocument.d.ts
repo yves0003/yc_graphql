@@ -19,6 +19,11 @@ type CoursType = {
   adresse: string
   dateCreation?: Date
   dateUpdate?: Date
+  dateDebut: Date
+  dateFin: Date
+  heureDebut: Date
+  heureFin: Date
+  color: string
 }
 
 type CoursByDateType = {

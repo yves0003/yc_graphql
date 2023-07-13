@@ -1,5 +1,7 @@
 export default /* GraphQL */ `
   scalar ISODate
+  scalar ISOTime
+
   type Cours {
     _id: String!
     prof: String
@@ -21,6 +23,11 @@ export default /* GraphQL */ `
     conseils: String
     allergies: String
     adresse: String
+    dateDebut: ISODate
+    dateFin: ISODate
+    heureDebut: ISOTime
+    heureFin: ISOTime
+    color: String
   }
 
   input CoursInput {
@@ -41,6 +48,11 @@ export default /* GraphQL */ `
     conseils: String
     allergies: String
     adresse: String
+    dateDebut: ISODate
+    dateFin: ISODate
+    heureDebut: ISOTime
+    heureFin: ISOTime
+    color: String
   }
 
   type CoursDeleteErr {
@@ -59,7 +71,7 @@ export default /* GraphQL */ `
 
   type Query {
     findOneCours(coursId: String!): CoursResult
-    findAllCours:[CoursResult]
+    findAllCours: [CoursResult]
   }
   type Mutation {
     createCours(inputCours: CoursInput): CoursResult!

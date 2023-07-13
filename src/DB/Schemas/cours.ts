@@ -40,6 +40,26 @@ export const schemaCours = {
         bsonType: "date",
         description: "date de mise à jour du cours",
       },
+      dateDebut: {
+        bsonType: "date",
+        description: "date de début du cours",
+      },
+      dateFin: {
+        bsonType: "date",
+        description: "date de fin du cours",
+      },
+      heureDebut: {
+        bsonType: "date",
+        description: "heure de début du cours",
+      },
+      heureFin: {
+        bsonType: "date",
+        description: "heure de fin du cours",
+      },
+      color: {
+        bsonType: "string",
+        description: "couleur attribué au cours",
+      },
       tags: {
         bsonType: "array",
         items: {
