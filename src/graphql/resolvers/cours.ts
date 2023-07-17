@@ -46,11 +46,7 @@ const findOneCours = async (
   }
 }
 
-const findAllCours = async (
-  _parents: void,
-  arg: void,
-  { db }: { db: Db }
-) => {
+const findAllCours = async (_parents: void, arg: void, { db }: { db: Db }) => {
   try {
     const result = await cours.findAll(db)
     return result
@@ -67,6 +63,12 @@ const updateCours = async (
   _infos: any
 ) => {
   try {
+    // if (inputCours.dateDebut) {
+    //   inputCours.dateDebut = new Date(inputCours.dateDebut)
+    // }
+    // if (inputCours.dateFin) {
+    //   inputCours.dateFin = new Date(inputCours.dateFin)
+    // }
     const result = await cours.updateOne(_context.db, coursId, inputCours)
     return result
   } catch (error) {

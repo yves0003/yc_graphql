@@ -41,8 +41,11 @@ export const findOne = async (db: Db, coursId: any) => {
 
 export const findAll = async (db: Db) => {
   try {
-    const data = await db.collection<CoursType>(coursDataName).find().sort({ dateCreation: -1 })
-    .toArray()
+    const data = await db
+      .collection<CoursType>(coursDataName)
+      .find()
+      .sort({ dateCreation: -1 })
+      .toArray()
     return data
   } catch (error) {
     throw new Error(`Un problème est survenue dans la requête findOne des cours : ${error}`)

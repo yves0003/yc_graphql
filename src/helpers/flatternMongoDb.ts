@@ -1,13 +1,16 @@
 export function flattenObject(obj: any, prefix = ""): { [key: string]: any } {
   return Object.keys(obj).reduce((result: { [key: string]: any }, key: string) => {
     const newKey = prefix ? `${prefix}.${key}` : key
-    if (Array.isArray(obj[key])) {
-      return { ...result, [newKey]: obj[key] }
-    } else if (typeof obj[key] === "object" && obj[key] !== null) {
-      const flattenedSubObject = flattenObject(obj[key], newKey)
+    const value = obj[key]
+    if (Array.isArray(value)) {
+      return { ...result, [newKey]: value }
+    } else if (value instanceof Date) {
+      return { ...result, [newKey]: value }
+    } else if (typeof value === "object" && value !== null) {
+      const flattenedSubObject = flattenObject(value, newKey)
       return { ...result, ...flattenedSubObject }
     } else {
-      return { ...result, [newKey]: obj[key] }
+      return { ...result, [newKey]: value }
     }
   }, {})
 }
