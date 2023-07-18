@@ -3,6 +3,7 @@ export default /* GraphQL */ `
   scalar ISOTime
 
   type Cours {
+    annulation: String
     _id: String!
     prof: String
     title: String
@@ -28,9 +29,15 @@ export default /* GraphQL */ `
     heureDebut: ISOTime
     heureFin: ISOTime
     color: String
+    isReccurent: Boolean
+    isAbonnement: Boolean
+    nbMoisAbonnement: Int
+    nbJoursAffiles: Int
+    nbJoursEcart: Int
   }
 
   input CoursInput {
+    annulation: String
     prof: String
     title: String
     categorie: String
@@ -53,6 +60,11 @@ export default /* GraphQL */ `
     heureDebut: ISOTime
     heureFin: ISOTime
     color: String
+    isReccurent: Boolean
+    isAbonnement: Boolean
+    nbMoisAbonnement: Int
+    nbJoursAffiles: Int
+    nbJoursEcart: Int
   }
 
   type CoursDeleteErr {

@@ -107,6 +107,26 @@ export const schemaCours = {
         bsonType: "string",
         description: "adresse du lieu de formation",
       },
+      isReccurent: {
+        bsonType: "bool",
+        description: "Vérifier si le cours est recurrent",
+      },
+      isAbonnement: {
+        bsonType: "bool",
+        description: "Vérifier si le cours est un abonnement",
+      },
+      nbMoisAbonnement: {
+        bsonType: "int",
+        description: "Nombre de mois de l'abonnement",
+      },
+      nbJoursAffiles: {
+        bsonType: "int",
+        description: "Nombre de jours successifs du cours",
+      },
+      nbJoursEcart: {
+        bsonType: "int",
+        description: "Nombre de jours d'écart entre 2 séances",
+      },
     },
     required: ["_id", "title"],
   },
