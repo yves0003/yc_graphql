@@ -57,10 +57,21 @@ export default /* GraphQL */ `
   type UserFindErr {
     messageErrorUserFindErr: String!
   }
-  union UserResult = User | UserCreateErr | UserUpdateErr | UserDeleteErr | UserFindErr
+  type UserFindEmailErr {
+    messageErrorUserFindEmailErr: String!
+  }
+
+  union UserResult =
+      User
+    | UserCreateErr
+    | UserUpdateErr
+    | UserDeleteErr
+    | UserFindErr
+    | UserFindEmailErr
 
   type Query {
     findOneUser(userId: String!): UserResult
+    findOneUserByEmail(email: String!): UserResult
   }
   type Mutation {
     createUser(inputUser: UserInput): UserResult!

@@ -9,28 +9,32 @@ export const schemaUsers = {
         description: "Identifiant de l'utilisateur",
       },
       name: {
-        bsonType: "string",
+        bsonType: ["null", "string"],
         description: "nom de l'utilisateur",
       },
       firstname: {
-        bsonType: "string",
+        bsonType: ["null", "string"],
         description: "Prenom de l'utilisateur",
       },
       dateCreation: {
-        bsonType: "date",
+        bsonType: ["null", "date"],
         description: "Date de creation du user",
       },
       dateUpdate: {
-        bsonType: "date",
+        bsonType: ["null", "date"],
         description: "date de mise à jour de ses informations",
       },
       dateLastConnexion: {
-        bsonType: "date",
+        bsonType: ["null", "date"],
         description: "date de dernière connexion - RGPD",
       },
       numTel: {
-        bsonType: "string",
+        bsonType: ["null", "string"],
         description: "Numéro de téléphone de l'utilisateur",
+      },
+      idStripe: {
+        bsonType: ["null", "string"],
+        description: "Identifiant de l'utilisateur sur Stripe",
       },
       email: {
         bsonType: "string",
@@ -76,7 +80,7 @@ export const schemaUsers = {
         },
       },
     },
-    required: ["_id"],
+    required: ["_id", "email"],
   },
 }
 // la date et heure de paiement permettra de voir quel nombre de séances réduire par rapport au cours pris

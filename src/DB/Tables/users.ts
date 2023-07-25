@@ -41,6 +41,15 @@ export const findOne = async (db: Db, userId: any) => {
   }
 }
 
+export const findOneByEmail = async (db: Db, email: any) => {
+  try {
+    const data = await db.collection<UserType>(usersDataName).findOne({ email: email })
+    return data
+  } catch (error) {
+    throw new Error(`Un problème est survenue dans la requête findOne des users : ${error}`)
+  }
+}
+
 export const deleteOne = async (db: Db, userId: any) => {
   try {
     const result = await db.collection<UserType>(usersDataName).deleteOne({ _id: userId })
@@ -56,7 +65,11 @@ export const updateOne = async (db: Db, userId: any, valToUpdate: UserType) => {
     const flatValToUpdate = flattenObject(valToUpdate)
     const result = await db
       .collection<UserType>(usersDataName)
-      .findOneAndUpdate({ _id: userId }, { $set: flatValToUpdate }, { returnDocument: "after" })
+      .findOneAndUpdate(
+        { _id: userId },
+        { $set: flatValToUpdate },
+        { returnDocument: "after", upsert: true }
+      )
       .then(({ value }) => {
         return value
       })

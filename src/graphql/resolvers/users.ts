@@ -41,6 +41,19 @@ const findOneUser = async (_parents: void, { userId }: { userId: string }, { db 
   }
 }
 
+const findOneUserByEmail = async (
+  _parents: void,
+  { email }: { email: string },
+  { db }: { db: Db }
+) => {
+  try {
+    const result = await users.findOneByEmail(db, email)
+    return result
+  } catch (error) {
+    return { messageErrorUserFindErr: `La recherche d'un user a échoué : ${error}` }
+  }
+}
+
 const updateUser = async (
   _parents: any,
   { inputUser, userId }: { inputUser: UserType; userId: string },
@@ -61,11 +74,13 @@ const userResolvers = {
       if (obj.messageErrorUserUpdateErr) return "UserUpdateErr"
       if (obj.messageErrorUserCreateErr) return "UserCreateErr"
       if (obj.messageErrorUserFindErr) return "UserFindErr"
+      if (obj.messageErrorUserFindEmailErr) return "UserFindEmailErr"
       return "User"
     },
   },
   Query: {
     findOneUser,
+    findOneUserByEmail,
   },
   Mutation: {
     createUser,
