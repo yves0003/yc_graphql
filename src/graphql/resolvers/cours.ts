@@ -1,13 +1,48 @@
 import { GraphQLDateTime, GraphQLTime } from "graphql-scalars"
 import { cours } from "../../DB/Tables.js"
 import { Db } from "mongodb"
+import Stripe from "stripe"
+
 const createCours = async (
   _parents: any,
   { inputCours }: { inputCours: CoursType },
   { db }: { db: Db }
 ) => {
   try {
-    const result = await cours.create(db, inputCours)
+    const stripe = new Stripe(
+      "sk_test_51NWEZoBNeSlpSP9rnEyGXoKp8BS5IrNYg08CqxYw0gRKsT1m1OYkD6Ix2JfNfV9cv3DXn9pNmSv6P2odjOS0NnfU00pSqXuyrp",
+      {
+        apiVersion: "2022-11-15",
+      }
+    )
+    const product = await stripe.products.create({
+      name: `${inputCours.title}${
+        Number(inputCours.nbEleves) > 1 ? ` (${inputCours.nbEleves} séances)` : ""
+      }`,
+      active: true,
+      description: inputCours.excerpt,
+      images: [inputCours.link_image],
+      statement_descriptor: "YC WORKSHOP",
+    })
+    let price
+    if (inputCours.isAbonnement) {
+      price = await stripe.prices.create({
+        unit_amount: Number(inputCours.prix) * 100,
+        active: true,
+        currency: "eur",
+        product: product.id,
+        recurring: { interval: "month", interval_count: 1, usage_type: "licensed" },
+      })
+    } else {
+      price = await stripe.prices.create({
+        unit_amount: Number(inputCours.prix),
+        currency: "eur",
+        active: true,
+        product: product.id,
+      })
+    }
+
+    const result = await cours.create(db, { ...inputCours, idStripe: price })
     return result
   } catch (error) {
     console.log(error)

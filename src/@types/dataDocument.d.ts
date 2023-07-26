@@ -24,6 +24,7 @@ type CoursType = {
   heureDebut: Date
   heureFin: Date
   color: string
+  isAbonnement: boolean
 }
 
 type CoursByDateType = {
