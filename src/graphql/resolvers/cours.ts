@@ -24,7 +24,7 @@ const createCours = async (
       images: [inputCours.link_image],
       statement_descriptor: "YC WORKSHOP",
     })
-    let price
+    let price: Stripe.Price
     if (inputCours.isAbonnement) {
       price = await stripe.prices.create({
         unit_amount: Number(inputCours.prix) * 100,
@@ -42,7 +42,7 @@ const createCours = async (
       })
     }
 
-    const result = await cours.create(db, { ...inputCours, idStripe: price })
+    const result = await cours.create(db, { ...inputCours, idStripe: price.id })
     return result
   } catch (error) {
     console.log(error)
