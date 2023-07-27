@@ -17,7 +17,7 @@ const createCours = async (
     )
     const product = await stripe.products.create({
       name: `${inputCours.title}${
-        Number(inputCours.nbEleves) > 1 ? ` (${inputCours.nbEleves} séances)` : ""
+        Number(inputCours.nbSeances) > 1 ? ` (${inputCours.nbSeances} séances)` : ""
       }`,
       active: true,
       description: inputCours.excerpt,
@@ -35,7 +35,7 @@ const createCours = async (
       })
     } else {
       price = await stripe.prices.create({
-        unit_amount: Number(inputCours.prix),
+        unit_amount: Number(inputCours.prix) * 100,
         currency: "eur",
         active: true,
         product: product.id,
@@ -98,12 +98,6 @@ const updateCours = async (
   _infos: any
 ) => {
   try {
-    // if (inputCours.dateDebut) {
-    //   inputCours.dateDebut = new Date(inputCours.dateDebut)
-    // }
-    // if (inputCours.dateFin) {
-    //   inputCours.dateFin = new Date(inputCours.dateFin)
-    // }
     const result = await cours.updateOne(_context.db, coursId, inputCours)
     return result
   } catch (error) {
