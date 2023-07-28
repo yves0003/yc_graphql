@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "predev": "yarn build",
-    "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\""
+    "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
+    "start": "yarn dev"
   },
   "dependencies": {
     "@apollo/server": "^4.7.4",
